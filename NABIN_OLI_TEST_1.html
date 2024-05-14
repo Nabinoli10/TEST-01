@@ -1,0 +1,161 @@
+﻿Nabin Oli Test 01
+<!DOCTYPE html>
+<html> <head>
+      <style>
+        table {
+          text-align:center;
+          margin-left: auto;
+          margin-right: auto;
+          font-family: 'Lucida Sans', 'Lucida Sans Regular',
+                       'Lucida Grande', 'Lucida Sans Unicode',
+                        Geneva, Verdana, sans-serif;
+                        background-color: darkgoldenrod;
+        }
+        input, button {
+          padding: 14px 22px;           margin: 10px 0;
+          display: inline-block;        border: 1px solid #cccccc;
+          border-radius: 4px;           box-sizing: border-box;
+          font-family: 'Lucida Sans', 'Lucida Sans Regular',
+                       'Lucida Grande', 'Lucida Sans Unicode',
+                        Geneva, Verdana, sans-serif;
+          align: center;
+         }
+         #addGrade{
+          background-color: chartreuse;
+         }
+         #addActivity{
+          background-color:aqua;
+         }
+         #deleteActivityFromTop{
+          background-color:red;
+         }
+         #deleteActivityFromBottom{
+          background-color:deeppink;
+         }
+        
+         
+      
+      </style>
+   </head>
+   <body>
+      <div align="center">
+      <h1>Test Activity</h1>  
+       
+      <button onclick="addActivity()" id="addActivity">
+        Add Activity</button>
+
+      <label for="activity">Activity</label>
+      <input type="text" id="activity" size="3">
+       
+      <label for="Weight">Weight</label>
+      <input type="text" id="Weight" size="3"><br>    
+
+      <button onclick="addGrade()" id="addGrade">
+        Add Grade</button>
+
+      <label for="grade">Grade</label>
+      <input type="text" id="grade" size="3"">
+
+      <label for="activityNo">Activity no</label>
+      <input type="text" id="activityNo" size="3"><br>        
+   
+      <button onclick="deleteActivityFromTop()" id="deleteActivityFromTop">
+        Delete Activity From Top </button> 
+  
+        <button onclick="deleteActivityFromBottom()" id="deleteActivityFromBottom">
+        Delete Activity From Bottom </button>
+
+      <table border="2" id="Nabintbl" style="width:60%">
+          <tr>
+              <th>No</th>
+              <th>Activity</th> <th>Weight</th>
+              <th>Grade</th> </tr>  
+          <tr>
+              <td>1</td> <td>Quiz1</td>
+              <td>10</td> <td></td>
+          </tr>
+          <tr>
+              <td>2</td> <td>Quiz2</td>
+              <td>20</td> <td></td>
+          </tr>
+          <tr>
+              <td>3</td> <td>Act1</td>
+              <td>30</td> <td></td>
+          </tr>
+          <tr>
+              <td>4</td> <td>Act2</td>
+              <td>40</td> <td></td>
+          </tr>
+      </table>
+     <p id="ntbl" style="color:darkgoldenrod;" >Error: </p>
+<script>
+  noActivity = 4;
+  totalWeight = 100;
+  var ntbl = document.getElementById("ntbl");
+
+    function addActivity() {
+      var activity = document.getElementById("activity").value;
+      var weight = document.getElementById("Weight").value;
+
+      if (activity === "") {
+        ntbl.innerHTML = "Error : Activity name is rejected.";
+        return;
+      }
+      if (weight === "" || weight > 100 || weight < 1) {
+        ntbl.innerHTML = "Error : Weight is rejected.";
+        return;
+      }
+
+      var Nabintbl = document.getElementById("Nabintbl");
+      var row = Nabintbl.insertRow(-1);
+      var cell1 = row.insertCell(0);
+      var cell2 = row.insertCell(1);
+      var cell3 = row.insertCell(2);
+      var cell4 = row.insertCell(3);
+      noActivity += 1;
+      cell1.innerHTML = noActivity;
+      cell2.innerHTML = activity;
+      cell3.innerHTML = weight;
+      cell4.innerHTML = "";
+    }
+
+    function deleteActivityFromTop() {
+      var Nabintbl = document.getElementById("Nabintbl");
+
+      if (Nabintbl.rows.length <= 1) {
+        ntbl.innerHTML = "Error : No activities to delete.";
+        return;
+      }
+
+      Nabintbl.deleteRow(1);
+    }
+
+    function deleteActivityFromBottom() {
+      var Nabintbl = document.getElementById("Nabintbl");
+
+      if (Nabintbl.rows.length <= 1) {
+        ntbl.innerHTML = "Error : No activities to delete.";
+        return;
+      }
+
+      Nabintbl.deleteRow(-1);
+    }
+
+    function addGrade() {
+      var grade = document.getElementById("grade").value;
+      var activityNo = document.getElementById("activityNo").value;
+      var Nabintbl = document.getElementById("Nabintbl");
+
+      if (grade === "" || grade > 100 || grade < 0) {
+        ntbl.innerHTML = "Error : Grade is rejected.";
+        return;
+      }
+      if (activityNo < 1 || activityNo > Nabintbl.rows.length - 1) {
+        ntbl.innerHTML = "Error : Activity No is rejected.";
+        return;
+      }
+
+      Nabintbl.rows[activityNo].cells[3].innerHTML = grade;
+    }
+</script>
+  </body> </html>
